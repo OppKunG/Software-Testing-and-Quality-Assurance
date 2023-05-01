@@ -9,8 +9,8 @@ ${btnHome}      (//span[text()="หน้าแรก"])[2]
 # หรือ ${btnHome}    (//span[text(="หน้าแรก")])[2]
 
 *** Test Cases ***
-# # test pantip
-# #     Open pantip and search pantip   ${btnHome}
+# test pantip
+#     Open pantip and search pantip   ${btnHome}
 
 test assignment
     Open pantip
@@ -36,10 +36,9 @@ Open pantip and search pantip
     Click   //h2[text()="รัชดา"]
     Sleep   10
 
-#
 # Assignment
 Open pantip
-    # [Arguments]     ${xpath}                                 ${something}
+    # [Arguments                ${xpath}                       ${something}
     Open Browser    url=https://pantip.com/topic/41780470    browser=chromium
     # ${xxx}          Open Excel and return Values
 
