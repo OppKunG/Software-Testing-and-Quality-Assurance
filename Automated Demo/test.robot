@@ -1,21 +1,23 @@
-# Run code in terminal: robot test.robot
+# # Run code in terminal: robot test.robot
 
 *** Settings ***
 Library    RPA.Browser.Playwright
 Library    ExcelLibrary
 
 *** Variables ***
-${btnHome}      (//span[text()="หน้าแรก"])[2]
-${comments}      //*[@class="display-post-number"]
+${btnHome}      (//span[text()="หน้าแรก"])[2] 
+# หรือ ${btnHome}    (//span[text(="หน้าแรก")])[2]
 
 *** Test Cases ***
-# test pantip
-#     Open pantip and search pantip   ${btnHome}
+# # test pantip
+# #     Open pantip and search pantip   ${btnHome}
 
 test assignment
-    Open pantip and get all comment
+    Open pantip
+    CommentNumbers
 
 *** Keywords ***
+# Demo
 Open pantip and search pantip
     [Arguments]     ${xpath}
     Open Browser    https://www.pantip.com/     chromium
@@ -34,12 +36,16 @@ Open pantip and search pantip
     Click   //h2[text()="รัชดา"]
     Sleep   10
 
+#
+# Assignment
+Open pantip
+    # [Arguments]     ${xpath}                                 ${something}
+    Open Browser    url=https://pantip.com/topic/41780470    browser=chromium
+    # ${xxx}          Open Excel and return Values
 
-Open pantip and get all comment
-    Open Browser    https://pantip.com/topic/41780470     chromium
-    ${comments}     Get Text    (//div[@id="comment=counter"])[2]
-
-    FOR     ${counter}      IN  RANGE    1   $[comments.split()[0]]+1
-        ${comment}      Get Text    //span[@id="comment${counter}"]
-        Log To Console      ${comment}
+CommentNumbers
+    #id=value ได้เลย ถ้าเป็น class = xpath เท่านั้น
+    FOR               ${i}          IN RANGE            39
+    ${Comment} =      Get Text      id=comment${i+1}
+    Log To Console    ${Comment}
     END
